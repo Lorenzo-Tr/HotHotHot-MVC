@@ -8,6 +8,7 @@ require_once APP_PATH.'/kernel/const.php';
 require_once APP_PATH.'/kernel/autoload.php';
 require_once APP_PATH.'/routes/routing.php';
 
+
 $route = new AutoLoad();
 $route = new Routing();
 

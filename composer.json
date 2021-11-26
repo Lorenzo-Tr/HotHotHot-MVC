@@ -1,5 +1,7 @@
 {
     "require": {
-        "mpdf/mpdf": "^8.0"
+        "mpdf/mpdf": "^8.0.15",
+        "facebook/php-business-sdk": "^12.0",
+        "facebook/graph-sdk": "^5.1"
     }
 }
