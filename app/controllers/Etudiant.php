@@ -27,11 +27,5 @@ class Etudiant extends Controller{
     }
   }
 
-  public function pdf($id){
-    require_once APP_PATH . '/vendor/autoload.php';
 
-    $mpdf = new \Mpdf\Mpdf();
-    $mpdf->WriteHTML(file_get_contents(APP_PATH . "/tmp/cache/pdf$id.html"));
-    return $mpdf->Output();
-  }
 }
