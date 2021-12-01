@@ -85,7 +85,6 @@ class Database
         $stmt->execute();
 
         $this->closeDB();
-
     }
 
 }
