@@ -2,11 +2,11 @@
 
 class Controller{
   public function view($view, $data = []){
-    $S_fichier = VIEWS_PATH . $view . '.php';
+    $S_file = Constants::getViewPath() . $view . '.php';
 
     extract($data);
     ob_start();
-    include $S_fichier;
+    include $S_file;
     $content = ob_get_contents();
     ob_end_flush();
 
@@ -20,9 +20,5 @@ class Controller{
   public function redirect($url, $data = []){
       header('Location: https://'. $_SERVER['HTTP_HOST'] . '/' . ucfirst($url));
       exit();
-  }
-
-  public function model($model){
-    require_once MODELS_PATH . "$model.php";
   }
 }

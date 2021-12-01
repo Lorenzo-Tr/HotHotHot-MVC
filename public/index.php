@@ -1,15 +1,16 @@
 <?php
 // Const to get the app path
-define('APP_PATH', dirname(dirname(__FILE__)));
+define("APP_PATH", dirname(__DIR__));
 
 // Load Config
-require_once APP_PATH.'/config/config.php';
-require_once APP_PATH.'/kernel/const.php';
 require_once APP_PATH.'/kernel/autoload.php';
-require_once APP_PATH.'/routes/routing.php';
 
-$route = new AutoLoad();
+Autoloader::setFileExt('.php');
+Autoloader::setPath(APP_PATH);
+spl_autoload_register('Autoloader::loader');
+
+// To upgrade (make a config file on the kernel to parse yml file in config)
+require_once APP_PATH.'/config/config.php';
+
+
 $route = new Routing();
-
-
-
