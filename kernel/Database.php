@@ -58,10 +58,10 @@ class Database
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-
         $this->closeDB();
 
-        return $result;
+        if (password_verify($result['password'], PASSWORD_BCRYPT ))
+            return true;
     }
 
     public function insertUser($array){
@@ -74,11 +74,12 @@ class Database
              VALUES (:prenom, :nom,:email, :password,:dateTime_current, :dateTime_last, :nb_connexion );
              ";
 
+        $S_password_hash = password_hash($array['password'], PASSWORD_BCRYPT);
         $stmt = $dbh->prepare($req);
         $stmt->bindParam(':prenom', $array['prenom']);
         $stmt->bindParam(':nom', $array['nom']);
         $stmt->bindParam(':email', $array['email']);
-        $stmt->bindParam(':password', $array['password']);
+        $stmt->bindParam(':password', $S_password_hash);
         $stmt->bindParam(':dateTime_current', $array['dateTime_current']);
         $stmt->bindParam(':dateTime_last', $array['dateTime_last']);
         $stmt->bindParam(':nb_connexion', $array['nb_connexion']);
