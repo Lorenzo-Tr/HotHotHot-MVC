@@ -1,4 +1,5 @@
 <?php
+include_once 'Helpers/Global_Helpers.php';
 
 class Autoloader
 {

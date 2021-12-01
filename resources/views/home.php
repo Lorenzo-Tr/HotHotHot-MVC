@@ -1,10 +1,7 @@
-<?php $this->view('template/header', $data)?>
-<section>
-  <?php if(!empty($error)): ?>
-    <p><?= $error?></p>
-  <?php endif ?>
-<?php
+<?php extend('template/default')?>
 
-?>
+<?php startSection('content')?>
+<section>
+    <h1>Hi !</h1>
 </section>
-<?php $this->view('template/tails', $data)?>
+<?php endSection()?>
