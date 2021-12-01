@@ -34,7 +34,34 @@ class Database
         $this->closeDB();
 
         return $result;
+    }
 
+    public function selectEmail()
+    {
+        $dbh = $this->connectDB();
+
+        $sql = "SELECT email  FROM user" ;
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $this->closeDB();
+
+        return $result;
+    }
+
+    public function selectPassword()
+    {
+        $dbh = $this->connectDB();
+
+        $sql = "SELECT password  FROM user" ;
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $this->closeDB();
+
+        return $result;
     }
 
     public function insertUser($array){
