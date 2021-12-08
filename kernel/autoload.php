@@ -16,8 +16,13 @@ final class AutoLoad
     {
         $S_file = KERNEL_PATH . "$S_KernelName.php";
 
+<<<<<<< Updated upstream
         return self::_load($S_file);
     }
+=======
+
+            if (strtolower($file->getFilename()) === strtolower($filename)) {
+>>>>>>> Stashed changes
 
     public static function loadView($S_ViewName)
     {
