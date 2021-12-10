@@ -1,7 +1,6 @@
 <?php extend('template/home')?>
 
-<?php startSection('content');
-session_start();?>
+<?php startSection('content');?>
 <nav class="navbar">
     <a href="/" class="logo">
         <svg class="logo" viewBox="0 0 19 26" xmlns="http://www.w3.org/2000/svg">
