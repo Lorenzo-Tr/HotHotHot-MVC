@@ -21,6 +21,8 @@ class Views
 
     function make(string $view, array $data = [])
     {
+        if (!isset($_SESSION))
+            session_start();
         $output = (function ($data, $view): string {
             extract($data);
             ob_start();

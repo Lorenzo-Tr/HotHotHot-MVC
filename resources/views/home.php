@@ -1,7 +1,6 @@
 <?php extend('template/home')?>
 
-<?php startSection('content');
-session_start();?>
+<?php startSection('content');?>
 <nav class="navbar">
     <a href="/" class="logo">
         <svg class="logo" viewBox="0 0 19 26" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +17,7 @@ session_start();?>
         }
         else
             echo '    <ul class="nav-links">
-        <li class="nav-item "><a href="#">Sign-in</a></li>
+        <li class="nav-item "><a href="inscription">Sign-in</a></li>
         <li class="nav-item"><a class="button" href="login">Log-in</a></li>
     </ul>';
 

@@ -9,11 +9,12 @@ class Login extends Controller
         if (!LoginModel::login())
             view('login',$data);
         else
-        $this->redirect('');
+            $this->redirect('');
 
     }
 
     public function logout(){
+
         LoginModel::logout();
         $this->redirect('');
     }

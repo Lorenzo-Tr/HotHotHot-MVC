@@ -17,6 +17,7 @@ class LoginModel
                     $_SESSION['id'] = $results[0]->id;
                     $_SESSION['prenom'] = $results[0]->prenom;
                     $_SESSION['email'] = $results[0]->email;
+                    $db->loginNow($_SESSION['id']);
                     return true;
                 }else {
                     return false;
@@ -32,6 +33,8 @@ class LoginModel
 
     static function logout(){
         session_start();
+        $db = new Database();
+        $db->logout($_SESSION['id']);
         session_unset();
         session_destroy();
     }
