@@ -1,6 +1,7 @@
 <?php extend('template/home')?>
 
-<?php startSection('content')?>
+<?php startSection('content');
+session_start();?>
 <nav class="navbar">
     <a href="/" class="logo">
         <svg class="logo" viewBox="0 0 19 26" xmlns="http://www.w3.org/2000/svg">
@@ -8,10 +9,21 @@
                   fill="currentColor"/>
         </svg>
     </a>
-    <ul class="nav-links">
+    <?php
+        if (isset($_SESSION["id"])) {
+            echo '    <ul class="nav-links">
+        <li class="nav-item "><a href="login/logout">Déconnexion</a></li>
+        <li class="nav-item"><a class="button" href="#">'.$_SESSION["prenom"].'</a></li>
+    </ul>';
+        }
+        else
+            echo '    <ul class="nav-links">
         <li class="nav-item "><a href="#">Sign-in</a></li>
-        <li class="nav-item"><a class="button" href="#">Log-in</a></li>
-    </ul>
+        <li class="nav-item"><a class="button" href="login">Log-in</a></li>
+    </ul>';
+
+    ?>
+
 </nav>
 <section class="wrapper">
     <div class="content">
