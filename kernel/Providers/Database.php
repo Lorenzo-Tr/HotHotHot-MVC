@@ -36,12 +36,13 @@ class Database
         return $result;
     }
 
-    public function selectEmail()
+    public function getEmail($email)
     {
         $dbh = $this->connectDB();
 
-        $sql = "SELECT email  FROM user" ;
+        $sql = "SELECT *  FROM user WHERE email =:email" ;
         $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -50,19 +51,6 @@ class Database
         return $result;
     }
 
-    public function selectPassword()
-    {
-        $dbh = $this->connectDB();
-
-        $sql = "SELECT password  FROM user" ;
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $this->closeDB();
-
-        if (password_verify($result['password'], PASSWORD_BCRYPT ))
-            return true;
-    }
 
     public function insertUser($array){
         $dbh = $this->connectDB();
