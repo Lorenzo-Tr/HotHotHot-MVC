@@ -17,7 +17,7 @@
         }
         else
             echo '    <ul class="nav-links">
-        <li class="nav-item "><a href="#">Sign-in</a></li>
+        <li class="nav-item "><a href="inscription">Sign-in</a></li>
         <li class="nav-item"><a class="button" href="login">Log-in</a></li>
     </ul>';
 

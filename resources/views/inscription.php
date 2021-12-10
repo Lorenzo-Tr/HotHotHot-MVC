@@ -14,8 +14,8 @@
     </nav>
     <section class="wrapper">
         <div class="content">
-            <h1>Bonjour maître. Veuillez vous connecter.</h1>
-            <form action="" method="POST">
+            <h1>Bonjour nouveau maître. Veuillez vous inscrire.</h1>
+            <form action="inscription/addUser" method="POST">
                 <label for="prenom">Prenom</label>
                 <input type="text" name="prenom"><br>
                 <label for="nom">Nom</label>
@@ -24,7 +24,7 @@
                 <input type="email" name="email"><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" required><br>
-                <button type="submit">Se connecter</button>
+                <button type="submit">S'inscrire</button>
             </form>
         </div>
     </section>
