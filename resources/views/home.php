@@ -1,14 +1,6 @@
-<?php $this->view('template/header', $data)?>
-<section>
-  <?php if(!empty($error)): ?>
-    <p><?= $error?></p>
-  <?php endif ?>
-<?php
+<?php extend('template/home')?>
 
-<<<<<<< Updated upstream
-?>
-=======
-<?php startSection('content'); ?>
+<?php startSection('content')?>
 <nav class="navbar">
     <a href="/" class="logo">
         <svg class="logo" viewBox="0 0 19 26" xmlns="http://www.w3.org/2000/svg">
@@ -16,20 +8,10 @@
                   fill="currentColor"/>
         </svg>
     </a>
-    <?php
-    session_start();
-    if (isset($_SESSION['id'])){
-        echo '    <ul class="nav-links">
-         <li class="nav-item "><a href="login/logout">Logout</a></li>
-        <li class="nav-item"><a class="button" href="#">'.$_SESSION["prenom"].'</a></li>
-    </ul>';
-    }
-    else echo ' <ul class="nav-links">
-        <li class="nav-item "><a href="inscription">Sign-in</a></li>
-        <li class="nav-item"><a class="button" href="login">Log-in</a></li>
-    </ul>';
-    ?>
-
+    <ul class="nav-links">
+        <li class="nav-item "><a href="#">Sign-in</a></li>
+        <li class="nav-item"><a class="button" href="#">Log-in</a></li>
+    </ul>
 </nav>
 <section class="wrapper">
     <div class="content">
@@ -39,6 +21,6 @@
             <a class="button" href="#">Documentation</a>
         </section>
     </div>
->>>>>>> Stashed changes
 </section>
-<?php $this->view('template/tails', $data)?>
+<canvas id="gradient-canvas" data-transition-in></canvas>
+<?php endSection()?>

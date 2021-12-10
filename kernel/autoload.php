@@ -1,62 +1,85 @@
 <?php
+include_once 'Helpers/Global_Helpers.php';
 
-final class AutoLoad
+class Autoloader
 {
-    public function __construct()
+    /**
+     * File extension as a string. Defaults to ".php".
+     */
+    protected static $fileExt = '.php';
+
+    /**
+     * The top level directory where recursion will begin. Defaults to the current
+     * directory.
+     */
+    protected static $pathTop = __DIR__;
+
+    /**
+     * A placeholder to hold the file iterator so that directory traversal is only
+     * performed once.
+     */
+    protected static $fileIterator = null;
+
+    /**
+     * Autoload function for registration with spl_autoload_register
+     *
+     * Looks recursively through project directory and loads class files based on
+     * filename match.
+     *
+     * @param string $className
+     */
+    public static function loader($className)
     {
-        spl_autoload_register('self::loadKernel');
-        //spl_autoload_register('self::loadView');
-        spl_autoload_register('self::loadModel');
-        spl_autoload_register('self::loadController');
-        spl_autoload_register('self::loadHelper');
+        $directory = new RecursiveDirectoryIterator(static::$pathTop, RecursiveDirectoryIterator::SKIP_DOTS);
 
-    }
+        if (is_null(static::$fileIterator)) {
 
-    public static function loadKernel($S_KernelName)
-    {
-        $S_file = KERNEL_PATH . "$S_KernelName.php";
+            static::$fileIterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::LEAVES_ONLY);
 
-<<<<<<< Updated upstream
-        return self::_load($S_file);
-    }
-=======
+        }
+
+        $filename = $className . static::$fileExt;
+
+        foreach (static::$fileIterator as $file) {
 
             if (strtolower($file->getFilename()) === strtolower($filename)) {
->>>>>>> Stashed changes
 
-    public static function loadView($S_ViewName)
-    {
-        $S_file = VIEWS_PATH . "$S_ViewName.php";
+                if ($file->isReadable()) {
 
-        return self::_load($S_file);
-    }
+                    include_once $file->getPathname();
 
-    public static function loadModel($S_ModelName)
-    {
-        $S_file = MODELS_PATH . "$S_ModelName.php";
+                }
+                break;
 
-        return self::_load($S_file);
-    }
+            }
 
-    public static function loadController($S_ControllerName)
-    {
-        $S_file = CONTROLLERS_PATH . "$S_ControllerName.php";
-
-        return self::_load($S_file);
-    }
-
-    public static function loadHelper($S_HelperName)
-    {
-        $S_file = HELPERS_PATH . "$S_HelperName.php";
-
-        return self::_load($S_file);
-    }
-
-    private static function _load($S_loadFile)
-    {
-        if (is_readable($S_loadFile)) {
-            require $S_loadFile;
         }
+
     }
+
+    /**
+     * Sets the $fileExt property
+     *
+     * @param string $fileExt The file extension used for class files.  Default is "php".
+     */
+    public static function setFileExt($fileExt)
+    {
+        static::$fileExt = $fileExt;
+    }
+
+    /**
+     * Sets the $path property
+     *
+     * @param string $path The path representing the top level where recursion should
+     *                     begin. Defaults to the current directory.
+     */
+    public static function setPath($path)
+    {
+        static::$pathTop = $path;
+    }
+
 }
+
+
+
 
