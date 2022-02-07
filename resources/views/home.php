@@ -26,7 +26,7 @@
 </nav>
 <section class="wrapper">
     <div class="content">
-        <h1>Combine comfort and energy savings on a daily basis.</h1>
+        <h1>Combine comfort and energy savings on your day to day life.</h1>
         <section class="buttons">
             <a class="button" href="#">Download</a>
             <a class="button" href="#">Documentation</a>

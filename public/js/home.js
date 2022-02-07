@@ -1,4 +1,4 @@
-import { Gradient } from './Gradient.js'
+import { Gradient } from './gradient.js'
 
 
 // Create your instance
