@@ -1,0 +1,22 @@
+{
+    "name": "HotHotHot",
+    "short_name": "HotHotHot",
+    "id":"MSMVCPWA",
+    "display": "standalone",
+    "start_url": "../hothothot",
+    "icons": [
+        {
+            "src": "/public/assets/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/assets/favicon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "prefer_related_applications": true,
+    "theme_color": "#56ce7f",
+    "background_color": "#56ce7f"
+}

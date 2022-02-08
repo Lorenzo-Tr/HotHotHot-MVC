@@ -28,8 +28,8 @@
     <div class="content">
         <h1>Combine comfort and energy savings on your day to day life.</h1>
         <section class="buttons">
-            <a class="button" href="#">Download</a>
-            <a class="button" href="#">Documentation</a>
+            <a class="button pwa-download" href="#">Download</a>
+            <a class="button" id="notifications" href="#">Documentation</a>
         </section>
     </div>
 </section>
