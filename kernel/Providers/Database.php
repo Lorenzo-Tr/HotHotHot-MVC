@@ -22,7 +22,6 @@ class Database
         $dbh = null;
     }
 
-<<<<<<< Updated upstream
     public function selectAll()
     {
         $dbh = $this->connectDB();
@@ -37,8 +36,6 @@ class Database
         return $result;
     }
 
-=======
->>>>>>> Stashed changes
     public function getEmail($email)
     {
         $dbh = $this->connectDB();
@@ -76,9 +73,7 @@ class Database
         $stmt->bindParam(':nb_connexion', $array['nb_connexion']);
         $stmt->execute();
 
-<<<<<<< Updated upstream
         $this->closeDB();
-=======
     }
 
     public function loginNow($id)
@@ -130,7 +125,6 @@ class Database
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
->>>>>>> Stashed changes
     }
 
 }

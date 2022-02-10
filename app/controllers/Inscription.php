@@ -8,9 +8,6 @@ class Inscription extends Controller
 
         view('inscription', $data);
     }
-<<<<<<< Updated upstream
-=======
-
     public function addUser($array)
     {
         $db = new Database();
@@ -18,5 +15,4 @@ class Inscription extends Controller
 
         $this->redirect('');
     }
->>>>>>> Stashed changes
 }

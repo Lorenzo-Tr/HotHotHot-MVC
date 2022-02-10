@@ -17,12 +17,9 @@ class AccountModel
                     $_SESSION['id'] = $results[0]->id;
                     $_SESSION['prenom'] = $results[0]->prenom;
                     $_SESSION['email'] = $results[0]->email;
-<<<<<<< Updated upstream:app/models/LoginModel.php
-=======
                     $db->loginNow($_SESSION['id']);
                     $db->setNullLoginTentative($results[0]->id);
 
->>>>>>> Stashed changes:app/models/AccountModel.php
                     return true;
                 }else {
                     $db->incrementLoginTentative($results[0]->id);
