@@ -22,7 +22,6 @@ class Database
         $dbh = null;
     }
 
-<<<<<<< Updated upstream
     public function selectAll()
     {
         $dbh = $this->connectDB();
@@ -37,8 +36,6 @@ class Database
         return $result;
     }
 
-=======
->>>>>>> Stashed changes
     public function getEmail($email)
     {
         $dbh = $this->connectDB();
@@ -76,61 +73,7 @@ class Database
         $stmt->bindParam(':nb_connexion', $array['nb_connexion']);
         $stmt->execute();
 
-<<<<<<< Updated upstream
         $this->closeDB();
-=======
-    }
-
-    public function loginNow($id)
-    {
-
-        $req = "UPDATE mvc.`user` SET dateTime_current=now() WHERE id=:id;
-                UPDATE user SET nb_connexion = nb_connexion + 1 WHERE id=:id  ";
-        $stmt = $this->_dbh->prepare($req);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-
-    }
-
-
-    public function logout($id)
-    {
-        $req = "UPDATE mvc.`user` SET dateTime_last=now() WHERE id=:id; ";
-        $stmt = $this->_dbh->prepare($req);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-    }
-
-    public function insert($champ, $val){
-        $req = "INSERT into mvc.user (:champ) values (:val);";
-        $stmt = $this->_dbh->prepare($req);
-        $stmt->bindParam(':champ', $champ);
-        $stmt->bindParam(':val', $val);
-        $stmt->execute();
-    }
-
-    public function incrementLoginTentative($id){
-        $req = "update `user` set login_tentative = login_tentative +1 where id=:id";
-        $stmt = $this->_dbh->prepare($req);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-    }
-
-    public function setNullLoginTentative($id){
-        $req = "update `user` set login_tentative = 0 where id=:id";
-        $stmt = $this->_dbh->prepare($req);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-    }
-
-    public function getLoginTentative($id){
-        $req = "select login_tentative from `user` where id=:id";
-        $stmt = $this->_dbh->prepare($req);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $result;
->>>>>>> Stashed changes
     }
 
 }
