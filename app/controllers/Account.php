@@ -1,12 +1,12 @@
 <?php
 
-class Login extends Controller
+class Account extends Controller
 {
 
     public function index()
     {
         $data['title'] = "Login";
-        if (!LoginModel::login())
+        if (!AccountModel::login())
             view('login',$data);
         else
         $this->redirect('');
@@ -14,7 +14,7 @@ class Login extends Controller
     }
 
     public function logout(){
-        LoginModel::logout();
+        AccountModel::logout();
         $this->redirect('');
     }
 
