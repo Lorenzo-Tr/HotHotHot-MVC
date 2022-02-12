@@ -8,9 +8,11 @@ class Inscription extends Controller
 
         view('inscription', $data);
     }
+
     public function addUser($array)
     {
         $db = new Database();
+
         $db->addUser($_POST);
 
         $this->redirect('');

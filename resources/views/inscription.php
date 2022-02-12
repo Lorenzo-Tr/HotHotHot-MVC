@@ -15,13 +15,13 @@
     <section class="wrapper">
         <div class="content">
             <h1>Bonjour maître. Veuillez vous connecter.</h1>
-            <form action="" method="POST">
+            <form action="inscription/addUser" method="POST">
                 <label for="prenom">Prenom</label>
-                <input type="text" name="prenom"><br>
+                <input type="text" name="prenom" required><br>
                 <label for="nom">Nom</label>
                 <input type="text" name="nom" required><br>
                 <label for="email">Email</label>
-                <input type="email" name="email"><br>
+                <input type="email" name="email" required><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" required><br>
                 <button type="submit">Se connecter</button>

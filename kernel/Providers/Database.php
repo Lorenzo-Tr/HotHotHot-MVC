@@ -1,79 +1,78 @@
 <?php
 
+require_once APP_PATH . '/vendor/autoload.php';
+
 class Database
 {
 
-    public function connectDB()
+    private $_dbh = null;
+    private static $_instance ;
+
+    public function __construct()
     {
-        require_once APP_PATH . '/vendor/autoload.php';
         $dotenv = Dotenv\Dotenv::createImmutable(APP_PATH);
         $dotenv->safeLoad();
-
         try {
-            $dbh = new PDO($_ENV['DBTYPE'].':host=' . $_ENV['DBHOST'] . ';dbname=' . $_ENV['DBNAME'], $_ENV['DBUSER'], $_ENV['DBPWD']);
-            return $dbh;
+            $this->_dbh = new PDO($_ENV['DBTYPE'] . ':host=' . $_ENV['DBHOST'] . ';dbname=' . $_ENV['DBNAME'], $_ENV['DBUSER'], $_ENV['DBPWD']);
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage() . '<br/>');
         }
     }
 
-    public function closeDB()
-    {
-        $dbh = null;
+    public static function getInstance(){
+        if(is_null(self::$_instance))
+        {
+            self::$_instance = new Database();
+        }
+        return self::$_instance;
     }
+
 
     public function selectAll()
     {
-        $dbh = $this->connectDB();
-
-        $sql = "SELECT *  FROM user" ;
-        $stmt = $dbh->prepare($sql);
+        $sql = "SELECT *  FROM user";
+        $stmt = $this->_dbh->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        $this->closeDB();
 
         return $result;
     }
 
     public function getEmail($email)
     {
-        $dbh = $this->connectDB();
 
-        $sql = "SELECT *  FROM user WHERE email =:email" ;
-        $stmt = $dbh->prepare($sql);
+        $sql = "SELECT *  FROM user WHERE email =:email";
+        $stmt = $this->_dbh->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        $this->closeDB();
 
         return $result;
     }
 
 
-    public function insertUser($array){
-        $dbh = $this->connectDB();
+    public function addUser($array)
+    {
 
 
         $req = "INSERT INTO user 
             (prenom, nom, email, password, dateTime_current, 
              dateTime_last, nb_connexion)
-             VALUES (:prenom, :nom,:email, :password,:dateTime_current, :dateTime_last, :nb_connexion );
+             VALUES (:prenom, :nom,:email, :password,:dateTime_current, :dateTime_last, 0 );
              ";
 
         $S_password_hash = password_hash($array['password'], PASSWORD_BCRYPT);
-        $stmt = $dbh->prepare($req);
+        $stmt = $this->_dbh->prepare($req);
         $stmt->bindParam(':prenom', $array['prenom']);
         $stmt->bindParam(':nom', $array['nom']);
         $stmt->bindParam(':email', $array['email']);
         $stmt->bindParam(':password', $S_password_hash);
         $stmt->bindParam(':dateTime_current', $array['dateTime_current']);
         $stmt->bindParam(':dateTime_last', $array['dateTime_last']);
-        $stmt->bindParam(':nb_connexion', $array['nb_connexion']);
         $stmt->execute();
 
-        $this->closeDB();
     }
 
     public function loginNow($id)
@@ -94,6 +93,7 @@ class Database
         $stmt = $this->_dbh->prepare($req);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+
     }
 
     public function insert($champ, $val){
@@ -118,6 +118,31 @@ class Database
         $stmt->execute();
     }
 
+    public function setNullPassword($id){
+        $req = "update `user` set password = '' where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
+
+    public function setPassword($id, $password){
+        $req = "update `user` set password = :password where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+    }
+
+
+    public function getIdFromEmail($email){
+        $req = "select id from `user` where email=:email";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
     public function getLoginTentative($id){
         $req = "select login_tentative from `user` where id=:id";
         $stmt = $this->_dbh->prepare($req);
@@ -125,6 +150,15 @@ class Database
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
+    }
+
+    public function generateToken($idUser, $token){
+        $req = "insert into password_recovery (idUser, token, created_date, expiration_date)
+        values (:idUser, :token, NOW(), DATE_ADD(NOW(), INTERVAL 5 MINUTE ))";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':idUser', $idUser);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
     }
 
 }
