@@ -17,7 +17,7 @@
         <script type="module" src="/public/js/home.js" ></script>
         <script type="module" src="/public/js/app.js" ></script>
     </head>
-    <body class="theme-light">
+    <body>
         <?php section('content')?>
     </body>
 </html>
