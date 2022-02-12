@@ -48,10 +48,10 @@ class alert {
 
   selectCorrectImg(type) {
     if (type === "info") {
-      this.imgsrc = "asset/img/Info.webp";
+      this.imgsrc = "/public/assets/img/Info.webp";
     }
     if (type === "warning") {      
-      this.imgsrc = "asset/img/Warning.webp";
+      this.imgsrc = "/public/assets/img/Warning.webp";
     }
   }
 

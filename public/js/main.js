@@ -1,11 +1,11 @@
 import * as Utils from './modules/utils.js';
 import * as DOM from './modules/const.js';
-import { makeChart } from './modules/chart.js';
+// import { makeChart } from './modules/chart.js';
 import * as Alert from './modules/alert.js';
 
 window.addEventListener("load", () => {
   if (localStorage.length == 0) {
-    Utils.getTempJSON("../asset/data/temp.json", r => {
+    Utils.getTempJSON("/public/assets/data/temp.json", r => {
       let data = Utils.getRandomData(r);
 
       localStorage.setItem('EXTERIOR_TEMP', data.exterior.temp)
