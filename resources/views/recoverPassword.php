@@ -1,6 +1,7 @@
 <?php extend('template/home')?>
 
 <?php startSection('content')?>
+
     <nav class="navbar">
         <a href="/" class="logo">
             <svg class="logo" viewBox="0 0 19 26" xmlns="http://www.w3.org/2000/svg">
@@ -14,19 +15,14 @@
     </nav>
     <section class="wrapper">
         <div class="content">
-            <h1>Bonjour maître. Veuillez vous connecter.</h1>
-            <form action="inscription/addUser" method="POST">
-                <label for="prenom">Prenom</label>
-                <input type="text" name="prenom" required><br>
-                <label for="nom">Nom</label>
-                <input type="text" name="nom" required><br>
+            <h4>Veuillez saisir votre adresse pour avoir un nouveau mot de passe</h4>
+            <form action="" method="POST">
                 <label for="email">Email</label>
-                <input type="email" name="email" required><br>
-                <label for="password">Password</label>
-                <input type="password" name="password" required><br>
-                <button type="submit">S'inscrire</button>
+                <input type="email" name="email"><br><br>
+                <button type="submit">Envoyer</button>
             </form>
         </div>
     </section>
     <canvas id="gradient-canvas" data-transition-in></canvas>
+
 <?php endSection()?>

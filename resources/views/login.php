@@ -16,8 +16,8 @@
         <div class="content">
             <h1>Bonjour maître. Veuillez vous connecter.</h1>
             <?php
-            if (isset($error))
-                echo "<p style='color: red'><strong>".$error."</strong></p>"
+            if (isset($_SESSION['error']))
+                echo "<p style='color: red'><strong>".$_SESSION['error']."</strong></p>"
             ?>
             <form action="" method="POST">
                 <label for="email">Email</label>
@@ -27,6 +27,8 @@
                 <button type="submit">Se connecter</button>
             </form>
         </div>
+
+        <a href="recoverPassword">Mot de passe oublié</a>
     </section>
     <canvas id="gradient-canvas" data-transition-in></canvas>
 <?php endSection()?>

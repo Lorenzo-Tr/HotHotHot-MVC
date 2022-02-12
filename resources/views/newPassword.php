@@ -14,17 +14,11 @@
     </nav>
     <section class="wrapper">
         <div class="content">
-            <h1>Bonjour maître. Veuillez vous connecter.</h1>
-            <form action="inscription/addUser" method="POST">
-                <label for="prenom">Prenom</label>
-                <input type="text" name="prenom" required><br>
-                <label for="nom">Nom</label>
-                <input type="text" name="nom" required><br>
-                <label for="email">Email</label>
-                <input type="email" name="email" required><br>
+            <h4>Veuillez saisir votre adresse</h4>
+            <form action="" method="POST">
                 <label for="password">Password</label>
                 <input type="password" name="password" required><br>
-                <button type="submit">S'inscrire</button>
+                <button type="submit">Envoyer</button>
             </form>
         </div>
     </section>

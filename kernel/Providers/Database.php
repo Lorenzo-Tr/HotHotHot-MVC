@@ -1,8 +1,13 @@
 <?php
 require_once APP_PATH . '/vendor/autoload.php';
 
+require_once APP_PATH . '/vendor/autoload.php';
+
 class Database
 {
+    private $_dbh = null;
+    private static $_instance ;
+
     private $_dbh = null;
     private static $_instance ;
 
@@ -24,6 +29,7 @@ class Database
         }
         return self::$_instance;
     }
+
 
     public function selectAll()
     {
@@ -91,6 +97,71 @@ class Database
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
+    }
+
+    public function insert($champ, $val){
+        $req = "INSERT into mvc.user (:champ) values (:val);";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':champ', $champ);
+        $stmt->bindParam(':val', $val);
+        $stmt->execute();
+    }
+
+    public function incrementLoginTentative($id){
+        $req = "update `user` set login_tentative = login_tentative +1 where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
+
+    public function setNullLoginTentative($id){
+        $req = "update `user` set login_tentative = 0 where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
+
+    public function setNullPassword($id){
+        $req = "update `user` set password = '' where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
+
+    public function setPassword($id, $password){
+        $req = "update `user` set password = :password where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+    }
+
+
+    public function getIdFromEmail($email){
+        $req = "select id from `user` where email=:email";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function getLoginTentative($id){
+        $req = "select login_tentative from `user` where id=:id";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function generateToken($idUser, $token){
+        $req = "insert into password_recovery (idUser, token, created_date, expiration_date)
+        values (:idUser, :token, NOW(), DATE_ADD(NOW(), INTERVAL 5 MINUTE ))";
+        $stmt = $this->_dbh->prepare($req);
+        $stmt->bindParam(':idUser', $idUser);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
     }
 
 }

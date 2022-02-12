@@ -11,14 +11,14 @@
     <?php
         if (isset($_SESSION["id"])) {
             echo '    <ul class="nav-links">
-        <li class="nav-item "><a href="login/logout">Déconnexion</a></li>
+        <li class="nav-item "><a href="account/logout">Déconnexion</a></li>
         <li class="nav-item"><a class="button" href="#">'.$_SESSION["prenom"].'</a></li>
     </ul>';
         }
         else
             echo '    <ul class="nav-links">
         <li class="nav-item "><a href="inscription">Sign-in</a></li>
-        <li class="nav-item"><a class="button" href="login">Log-in</a></li>
+        <li class="nav-item"><a class="button" href="account/login">Log-in</a></li>
     </ul>';
 
     ?>
