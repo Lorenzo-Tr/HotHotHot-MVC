@@ -19,7 +19,7 @@
             <form action="" method="POST">
                 <label for="email">Email</label>
                 <input type="email" name="email"><br><br>
-                <button type="submit">Envoyer</button>
+                <button type="submit" class="button">Envoyer</button>
             </form>
         </div>
     </section>

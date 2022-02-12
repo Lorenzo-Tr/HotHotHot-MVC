@@ -18,7 +18,7 @@
             <form action="" method="POST">
                 <label for="password">Password</label>
                 <input type="password" name="password" required><br>
-                <button type="submit">Envoyer</button>
+                <button type="submit" class="button">Envoyer</button>
             </form>
         </div>
     </section>

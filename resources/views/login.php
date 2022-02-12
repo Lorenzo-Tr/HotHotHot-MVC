@@ -24,7 +24,7 @@
                 <input type="email" name="email"><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" required><br>
-                <button type="submit">Se connecter</button>
+                <button type="submit" class="button" style="margin-top: 10px">Se connecter</button>
             </form>
         </div>
 
