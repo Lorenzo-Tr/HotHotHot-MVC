@@ -27,11 +27,11 @@ window.addEventListener("load", () => {
 
   if (DOM.EXTERIOR_MINI_CARD != null) {
     Utils.setTemp(DOM.EXTERIOR_MINI_CARD, "exterior");
-    makeChart(DOM.CANVAS_EXTERIOR);
+    // makeChart(DOM.CANVAS_EXTERIOR);
   }
   if (DOM.INTERIOR_MINI_CARD != null) {
     Utils.setTemp(DOM.INTERIOR_MINI_CARD, "interior");
-    makeChart(DOM.CANVAS_INTERIOR);
+    // makeChart(DOM.CANVAS_INTERIOR);
   }
   if (DOM.TEMPLATE_INTERIOR != null) {
     let data = [

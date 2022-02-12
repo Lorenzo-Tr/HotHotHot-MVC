@@ -13,6 +13,11 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt;
 const addBtn = document.querySelector('.pwa-download');
 
+if (window.matchMedia('(display-mode: standalone)').matches) {
+    // document.location = '/hothothot'
+    console.log('display-mode is standalone');
+}
+
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
@@ -27,6 +32,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
         // Wait for the user to respond to the prompt
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
+                document.location = '/hothothot'
                 console.log('User accepted the A2HS prompt');
             } else {
                 console.log('User dismissed the A2HS prompt');
