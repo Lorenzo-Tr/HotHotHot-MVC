@@ -1,0 +1,134 @@
+{
+  "0":{
+    "exterior": {
+      "temp": "10",
+      "max": "13",
+      "min": "15"
+    },
+    "interior": {
+      "temp": "18",
+      "max": "20",
+      "min": "19"
+    }
+  },
+  "1":{
+    "exterior": {
+      "temp": "20",
+      "max": "20",
+      "min": "10"
+    },
+    "interior": {
+      "temp": "18",
+      "max": "10",
+      "min": "21"
+    }
+  },
+  "2":{
+    "exterior": {
+      "temp": "45",
+      "max": "50",
+      "min": "10"
+    },
+    "interior": {
+      "temp": "30",
+      "max": "30",
+      "min": "20"
+    }
+  },
+  "3":{
+    "exterior": {
+      "temp": "15",
+      "max": "10",
+      "min": "10"
+    },
+    "interior": {
+      "temp": "12",
+      "max": "15",
+      "min": "09"
+    }
+  },
+  "4":{
+    "exterior": {
+      "temp": "40",
+      "max": "40",
+      "min": "30"
+    },
+    "interior": {
+      "temp": "30",
+      "max": "31",
+      "min": "20"
+    }
+  },
+  "5":{
+    "exterior": {
+      "temp": "36",
+      "max": "36",
+      "min": "15"
+    },
+    "interior": {
+      "temp": "22",
+      "max": "23",
+      "min": "19"
+    }
+  },
+  "6":{
+    "exterior": {
+      "temp": "23",
+      "max": "25",
+      "min": "10"
+    },
+    "interior": {
+      "temp": "18",
+      "max": "23",
+      "min": "19"
+    }
+  },
+  "7":{
+    "exterior": {
+      "temp": "10",
+      "max": "12",
+      "min": "5"
+    },
+    "interior": {
+      "temp": "15",
+      "max": "18",
+      "min": "10"
+    }
+  },
+  "8":{
+    "exterior": {
+      "temp": "0",
+      "max": "2",
+      "min": "-5"
+    },
+    "interior": {
+      "temp": "10",
+      "max": "12",
+      "min": "6"
+    }
+  },
+  "9":{
+    "exterior": {
+      "temp": "-5",
+      "max": "-5",
+      "min": "-10"
+    },
+    "interior": {
+      "temp": "0",
+      "max": "2",
+      "min": "5"
+    }
+  },
+  "10":{
+    "exterior": {
+      "temp": "13",
+      "max": "15",
+      "min": "10"
+    },
+    "interior": {
+      "temp": "15",
+      "max": "18",
+      "min": "15"
+    }
+  }
+}
