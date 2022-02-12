@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (max-width: 640px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+.titleHidding{
+    top: -9999px;
+}
+
+h2 {
+    @apply text-3xl font-extrabold tracking-wide;
+}
+
+h3 {
+    @apply text-2xl font-bold;
+}
+
+h1 {
+    @apply text-2xl font-bold;
+}
+
+.max img {
+    @apply rotate-180;
+    height: 80%;
+}
+
+.max::after {
+    content: attr(value)"°C";
+}
+
+.min img {
+    height: 80%;
+}
+
+.min::after {
+    content: attr(value)"°C";
+}
+
+.setValue::after {
+    content: attr(value)"°C";
+}
+
+.setDataValue::after {
+    content: attr(value);
+}
+
+.hours::after {
+    content: attr(value);
+}
+
+.temp {
+    @apply text-7xl pr-5 font-bold;
+}
+
+.temp::after {
+    content: attr(value)"°C";
+}
+
+.flex-fix {
+    flex-basis: 100%;
+}
+
+.temp_section {
+    @apply flex flex-wrap justify-between max-w-5xl;
+}
+
+@media (min-width: 768px) {
+    .temp_section {
+        flex-direction: inherit;
+    }
+}
+
+@media (min-width: 1024px) {
+    body {
+        max-width: 950px;
+        margin: 0 auto;
+    }
+}
+
+.ViewMore_Icon {
+    @apply ml-1 w-5 justify-end;
+    margin-bottom: 2px;
+}
+
+.Aurora_Bg {
+    overflow: hidden;
+    background-color: white;
+    background-image:
+            radial-gradient(at top right, #2575FC, transparent),
+            radial-gradient(at bottom left, #6A11CB, transparent),
+            radial-gradient(at bottom right, #7AA8F5, transparent),
+            radial-gradient(at top left, #B581ED, transparent);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#lastAlert li{
+    list-style: none;
+}
+
