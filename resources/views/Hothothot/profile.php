@@ -33,7 +33,7 @@
             </section>
             <footer  class="w-full flex flex-col items-center my-20">
                 <a class="text-red text-xl" href="#">Delete your account</a>
-                <button class="w-full py-3 Aurora_Bg rounded-xl text-2xl uppercase font-bold mt-8">Sign Out</button>
+                <a href="/account/logout" class="w-full py-3 Aurora_Bg rounded-xl text-2xl uppercase font-bold mt-8 " style="text-align: center;">Sign Out</a>
             </footer>
         </article>
     </main>

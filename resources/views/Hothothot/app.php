@@ -39,8 +39,7 @@
             <p class="inline-flex items-center text-lg mt-5">View more <img class="-rotate-90 ml-1 w-5"
                                                                             src="/public/assets/img/arrow.svg" alt=""></p>
         </a>
-        <button id="fetchnewdada" class="inline-flex items-end text-lg text-gray-400 mt-5">Fetch new data <img class="ViewMore_Icon"
-                                                                                                               src="/public/assets/img/arrow-nobar.svg" alt=""></button>
+
     </article>
     <article class="mt-5 mb-8">
         <header class="flex justify-between">

@@ -9,7 +9,7 @@ class AccountController extends Controller
         if (!AccountModel::login()) {
             view('login', $data);
         } else
-            $this->redirect('');
+            $this->redirect('hothothot');
 
     }
 
