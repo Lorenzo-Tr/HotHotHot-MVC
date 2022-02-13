@@ -7,7 +7,11 @@ class Caching
         CachingModel::save();
     }
 
-    public function get_data(){
-        $data = CachingModel::get();
+    public function get_home(){
+        echo CachingModel::get_home_data();
+    }
+
+    public function get_history(){
+        echo CachingModel::get_history_data();
     }
 }

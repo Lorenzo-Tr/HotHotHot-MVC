@@ -25,16 +25,12 @@ class CachingModel
         ]);
     }
 
-    static function get()
+    static function get_home_data()
     {
-        /*TODO
-        { interior : { value : 16.2, min: 2, max: 20}
-        */
         $db = new Database();
 
-
-        $sqlRecentvalueExt = "SELECT Max(timestamp),value FROM `hot_cache` WHERE name='exterieur'";
-        $sqlRecentvalueInt = "SELECT Max(timestamp),value FROM `hot_cache` WHERE name='interieur'";
+        $sqlRecentvalueExt = "SELECT Max(timestamp) as timestamp,value FROM `hot_cache` WHERE name='exterieur'";
+        $sqlRecentvalueInt = "SELECT Max(timestamp) as timestamp,value FROM `hot_cache` WHERE name='interieur'";
         $qRecentvalueExt = $db->query($sqlRecentvalueExt);
         $qRecentvalueInt = $db->query($sqlRecentvalueInt);
 
@@ -47,25 +43,26 @@ class CachingModel
         $sqlMaxInt = "SELECT Max(value) FROM `hot_cache` WHERE name='interieur'";
         $qMaxExt = $db->query($sqlMaxExt);
         $qMaxInt = $db->query($sqlMaxInt);
-        
 
-        $arrayExt = [];
-        while($row =mysqli_fetch_assoc($qRecentvalueExt))
-        {
-            $arrayExt[] = $row;
-        }
-
-        $arrayInt = [];
-        while($row =mysqli_fetch_assoc($qRecentvalueInt))
-        {
-            $arrayInt[] = $row;
-        }
+        $arrayExt = $qRecentvalueExt->fetch(PDO::FETCH_OBJ);
+        $arrayInt = $qRecentvalueInt->fetch(PDO::FETCH_OBJ);
 
         $array = [
-            'interieur' => ["value" => $arrayInt[1], "timestamp" => $arrayInt[0],"min" => mysqli_fetch_assoc($qMinInt),"max" => mysqli_fetch_assoc($qMaxInt)],
-            'exterieur' => ["value" => $arrayExt[1], "timestamp" => $arrayExt[0],"min" => mysqli_fetch_assoc($qMinExt),"max" => mysqli_fetch_assoc($qMaxExt)],
+            'interieur' => ["value" => $arrayInt->value, "timestamp" => $arrayInt->timestamp,"min" => $qMinInt->fetchColumn(), "max" => $qMaxInt->fetchColumn()],
+            'exterieur' => ["value" => $arrayExt->value, "timestamp" => $arrayExt->timestamp,"min" => $qMinExt->fetchColumn(), "max" => $qMaxExt->fetchColumn()],
         ];
 
+
+        return json_encode($array);
+    }
+
+    static function get_history_data(){
+        $db = new Database();
+
+        $sql = "SELECT `value`, `timestamp`, `name` FROM `hot_cache` WHERE cast(timestamp as Date) = cast(NOW() as Date)";
+        $q = $db->query($sql);
+
+        $array = $q->fetchAll();
 
         return json_encode($array);
     }
