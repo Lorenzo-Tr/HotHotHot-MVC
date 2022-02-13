@@ -56,10 +56,21 @@ class CachingModel
         return json_encode($array);
     }
 
-    static function get_history_data(){
+    static function get_interior_history_data(){
         $db = new Database();
 
-        $sql = "SELECT `value`, `timestamp`, `name` FROM `hot_cache` WHERE cast(timestamp as Date) = cast(NOW() as Date)";
+        $sql = "SELECT `value`, `timestamp`, `name` FROM `hot_cache` WHERE cast(timestamp as Date) = cast(NOW() as Date) AND name = 'interieur'";
+        $q = $db->query($sql);
+
+        $array = $q->fetchAll();
+
+        return json_encode($array);
+    }
+
+    static function get_exterior_history_data(){
+        $db = new Database();
+
+        $sql = "SELECT `value`, `timestamp`, `name` FROM `hot_cache` WHERE cast(timestamp as Date) = cast(NOW() as Date) AND name = 'exterieur'";
         $q = $db->query($sql);
 
         $array = $q->fetchAll();

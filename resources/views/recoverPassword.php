@@ -1,4 +1,4 @@
-<?php extend('template/home')?>
+<?php extend('template/T_default')?>
 
 <?php startSection('content')?>
 

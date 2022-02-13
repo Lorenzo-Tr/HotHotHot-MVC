@@ -1,6 +1,6 @@
 <?php
 
-class Inscription extends Controller
+class InscriptionController extends Controller
 {
     public function index()
     {

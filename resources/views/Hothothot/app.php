@@ -1,4 +1,4 @@
-<?php extend('template/hothothot')?>
+<?php extend('template/T_hothothot')?>
 
 <?php startSection('content');?>
 <main class="mt-9">

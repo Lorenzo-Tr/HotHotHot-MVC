@@ -56,12 +56,15 @@ export function setTemp(node, option = "all") {
 
 // Show History
 export function showHistory(DOM, parent, data) {
+
   data.forEach(element => {
+    let time = new Date(element.timestamp).getHours().toString().replace(/^(\d)$/,'0$1') + ":" + new Date(element.timestamp).getMinutes().toString().replace(/^(\d)$/,'0$1')
+
     let clone = DOM.cloneNode(true);
     let hours = clone.content.querySelector(".hours");
     let temp = clone.content.querySelector(".historyTemp");
-    hours.setAttribute('value', Object.keys(element))
-    temp.setAttribute('value', Object.values(element))
+    hours.setAttribute('value', time)
+    temp.setAttribute('value', element.value)
     parent.appendChild(clone.content);
   });
   

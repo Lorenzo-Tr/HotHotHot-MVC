@@ -1,6 +1,6 @@
 <?php
 
-class Hothothot extends Controller
+class HothothotController extends Controller
 {
     public function index()
     {

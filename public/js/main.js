@@ -27,33 +27,11 @@ Utils.getWebSocketData(socket, (data) => {
   fetch('/caching/save', fetchData)
       .catch(err => console.log(err))
 
-  updateUi(data)
+  loadHomeData();
 })
 
-function updateUi(data){
-  console.log(data)
-  localStorage.setItem('INTERIOR_TEMP', data.capteurs[0].Valeur)
-  localStorage.setItem('EXTERIOR_TEMP', data.capteurs[1].Valeur)
-  loadHomeData();
-}
-
 window.addEventListener("load", () => {
-  if (localStorage.length == 0) {
-    Utils.getTempJSON("caching/get_data", r => {
-      let data = Utils.getRandomData(r);
-
-      localStorage.setItem('EXTERIOR_TEMP', data.exterior.temp)
-      localStorage.setItem('EXTERIOR_MAX', data.exterior.max)
-      localStorage.setItem('EXTERIOR_MIN', data.exterior.min)
-
-      localStorage.setItem('INTERIOR_TEMP', data.interior.temp)
-      localStorage.setItem('INTERIOR_MAX', data.interior.max)
-      localStorage.setItem('INTERIOR_MIN', data.interior.min)
-
-      loadHomeData();
-    });
-  }
-
+  loadHomeData();
 
   if (DOM.OUTPUT_DATE != null)
     Utils.getStringDate(DOM.OUTPUT_DATE);
@@ -68,26 +46,27 @@ window.addEventListener("load", () => {
     // makeChart(DOM.CANVAS_INTERIOR);
   }
   if (DOM.TEMPLATE_INTERIOR != null) {
-    let data = [
-      { '14:00': "20" },
-      { '13:00': "22" },
-      { '12:00': "20" },
-      { '11:00': "15" },
-      { '10:00': "12" },
-      { '09:00': "9" },
-    ]
-    Utils.showHistory(DOM.TEMPLATE_INTERIOR, DOM.HISTORY, data)
+    fetch("/caching/get_interior_history")
+        .then(r => r.json())
+        .then(json => {
+          Utils.showHistory(DOM.TEMPLATE_INTERIOR, DOM.HISTORY, json)
+        })
   }
   if (DOM.TEMPLATE_EXTERIOR != null) {
-    let data = [
-      { '14:00': "20" },
-      { '13:00': "22" },
-      { '12:00': "20" },
-      { '11:00': "15" },
-      { '10:00': "12" },
-      { '09:00': "9" },
-    ]
-    Utils.showHistory(DOM.TEMPLATE_EXTERIOR, DOM.HISTORY, data)
+    fetch("/caching/get_exterior_history")
+        .then(r => r.json())
+        .then(json => {
+          Utils.showHistory(DOM.TEMPLATE_EXTERIOR, DOM.HISTORY, json)
+        })
+    // let data = [
+    //   { '14:00': "20" },
+    //   { '13:00': "22" },
+    //   { '12:00': "20" },
+    //   { '11:00': "15" },
+    //   { '10:00': "12" },
+    //   { '09:00': "9" },
+    // ]
+    // Utils.showHistory(DOM.TEMPLATE_EXTERIOR, DOM.HISTORY, data)
   }
 })
 
@@ -99,6 +78,18 @@ if (DOM.FETCH_NEW_DATA != null) {
 }
 
 function loadHomeData() {
+  fetch("/caching/get_home")
+      .then(r => r.json())
+      .then(json => {
+        localStorage.setItem('EXTERIOR_TEMP', json.exterieur.value)
+        localStorage.setItem('EXTERIOR_MAX', json.exterieur.max)
+        localStorage.setItem('EXTERIOR_MIN', json.exterieur.min)
+
+        localStorage.setItem('INTERIOR_TEMP', json.interieur.value)
+        localStorage.setItem('INTERIOR_MAX', json.interieur.max)
+        localStorage.setItem('INTERIOR_MIN', json.interieur.min)
+      })
+
   if (DOM.NODE_EXTERIOR_TEMP != null || DOM.NODE_INTERIOR_TEMP != null || DOM.TEMPLATE_WARNING != null) {
     let node = {
       "exterior": DOM.NODE_EXTERIOR_TEMP,
