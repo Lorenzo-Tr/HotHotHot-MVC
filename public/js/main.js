@@ -39,75 +39,25 @@ function updateUi(data){
 
 window.addEventListener("load", () => {
   if (localStorage.length == 0) {
-    let minInt = null;
-    let maxInt = null;
-    let minExt = null;
-    let maxExt = null;
-    //Utils.getTempJSON("/public/assets/data/temp.json", r => {
-    //  let data = Utils.getRandomData(r);
-//
-    //  localStorage.setItem('EXTERIOR_TEMP', data.exterior.temp)
-    //  localStorage.setItem('EXTERIOR_MAX', data.exterior.max)
-    //  localStorage.setItem('EXTERIOR_MIN', data.exterior.min)
-//
-    //  localStorage.setItem('INTERIOR_TEMP', data.interior.temp)
-    //  localStorage.setItem('INTERIOR_MAX', data.interior.max)
-    //  localStorage.setItem('INTERIOR_MIN', data.interior.min)
-//
-    //  loadHomeData();
-    //});
+    Utils.getTempJSON("caching/get_data", r => {
+      let data = Utils.getRandomData(r);
 
+      localStorage.setItem('EXTERIOR_TEMP', data.exterior.temp)
+      localStorage.setItem('EXTERIOR_MAX', data.exterior.max)
+      localStorage.setItem('EXTERIOR_MIN', data.exterior.min)
 
-    // Listen for messages
-    socket.addEventListener('message', function (event) {
-    let data = JSON.parse(event.data)
-    console.log('Message from server ', data.capteurs[0].Valeur);
-    
+      localStorage.setItem('INTERIOR_TEMP', data.interior.temp)
+      localStorage.setItem('INTERIOR_MAX', data.interior.max)
+      localStorage.setItem('INTERIOR_MIN', data.interior.min)
 
-    localStorage.setItem('INTERIOR_TEMP', data.capteurs[0].Valeur)
-    if (!minInt){
-      minInt = data.capteurs[0].Valeur
-      localStorage.setItem('INTERIOR_MIN', minInt)
-    }else if (minInt>data.capteurs[0].Valeur){
-      minInt = data.capteurs[0].Valeur
-      localStorage.setItem('INTERIOR_MIN', minInt)
-    }
-
-    if (!maxInt){
-      maxInt = data.capteurs[0].Valeur
-      localStorage.setItem('INTERIOR_MAX', maxInt)
-    }else if (maxInt<data.capteurs[0].Valeur){
-      maxInt = data.capteurs[0].Valeur
-      localStorage.setItem('INTERIOR_MAX', maxInt)
-    }
-
-
-    localStorage.setItem('EXTERIOR_TEMP', data.capteurs[1].Valeur)
-    if (!minExt){
-      minExt = data.capteurs[1].Valeur
-      localStorage.setItem('EXTERIOR_MIN', minExt)
-    }else if (minExt>data.capteurs[1].Valeur){
-      minExt = data.capteurs[1].Valeur
-      localStorage.setItem('EXTERIOR_MIN', minExt)
-    }
-
-    if (!maxExt){
-      maxExt = data.capteurs[1].Valeur
-      localStorage.setItem('EXTERIOR_MAX', maxExt)
-    }else if (maxExt<data.capteurs[1].Valeur){
-      maxExt = data.capteurs[1].Valeur
-      localStorage.setItem('EXTERIOR_MAX', maxExt)
-    }
-    
-
+      loadHomeData();
     });
-    
   }
+
 
   if (DOM.OUTPUT_DATE != null)
     Utils.getStringDate(DOM.OUTPUT_DATE);
 
-  loadHomeData();
 
   if (DOM.EXTERIOR_MINI_CARD != null) {
     Utils.setTemp(DOM.EXTERIOR_MINI_CARD, "exterior");

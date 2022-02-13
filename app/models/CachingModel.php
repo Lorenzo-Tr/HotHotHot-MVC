@@ -1,6 +1,6 @@
 <?php
 
-class Caching
+class CachingModel
 {
     static function save()
     {
@@ -23,5 +23,12 @@ class Caching
             "exteriorTimestamp" => date('Y/m/d H:i:s', $exterior->Timestamp),
             "exteriorName" => $exterior->Nom,
         ]);
+    }
+
+    static function get()
+    {
+        /*TODO
+        { interior : { value : 16.2, min: 2, max: 20}
+        µ/
     }
 }
