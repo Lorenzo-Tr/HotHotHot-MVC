@@ -15,8 +15,6 @@ setTimeout(function(){
 }, 2000)
 
 Utils.getWebSocketData(socket, (data) => {
-  console.log(data)
-
   let formData = new FormData();
   formData.append('data', JSON.stringify(data));
 
@@ -26,17 +24,17 @@ Utils.getWebSocketData(socket, (data) => {
     headers: new Headers()
   }
 
-
   fetch('/caching/save', fetchData)
-      .then(response => response.json())
-      .then((json) => {
-        updateUi(json)
-      })
       .catch(err => console.log(err))
+
+  updateUi(data)
 })
 
-function updateUi(){
-
+function updateUi(data){
+  console.log(data)
+  localStorage.setItem('INTERIOR_TEMP', data.capteurs[0].Valeur)
+  localStorage.setItem('EXTERIOR_TEMP', data.capteurs[1].Valeur)
+  loadHomeData();
 }
 
 window.addEventListener("load", () => {
@@ -160,7 +158,9 @@ function loadHomeData() {
 
     Alert.appendWarning(DOM.LASTALERT_LIST).then(() => {
       if (DOM.LASTALERT_LIST.childElementCount != 0) {
-        DOM.ALERT_PLACEHOLDER.classList.toggle("hidden");
+        DOM.ALERT_PLACEHOLDER.classList.add("hidden");
+      }else {
+        DOM.ALERT_PLACEHOLDER.classList.remove("hidden");
       }
     })
   }

@@ -124,28 +124,3 @@ export function getWebSocketData(socket, callback) {
     callback(data);
   });
 }
-
-
-  // socket.onmessage = function(event) {
-  //
-  //
-  //     callback
-  //
-  //
-  //     console.log(data)
-  //     console.log(data.capteurs)
-  //     console.log(data.capteurs[0])
-  //     console.log(data.capteurs[0].Nom)
-  //
-  //
-  // };
-
-  // socket.onclose = function(event) {
-  //     if (event.wasClean) {
-  //         alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-  //     } else {
-  //       // par exemple : processus serveur arrêté ou réseau en panne
-  //       // event.code est généralement 1006 dans ce cas
-  //         alert('[close] Connection died');
-  //     }
-  // };

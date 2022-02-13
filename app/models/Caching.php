@@ -23,9 +23,5 @@ class Caching
             "exteriorTimestamp" => date('Y/m/d H:i:s', $exterior->Timestamp),
             "exteriorName" => $exterior->Nom,
         ]);
-
-        if (!empty($q)) {
-            echo('✔');
-        } else echo('❌');
     }
 }
