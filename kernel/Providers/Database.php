@@ -1,13 +1,8 @@
 <?php
 require_once APP_PATH . '/vendor/autoload.php';
 
-require_once APP_PATH . '/vendor/autoload.php';
-
 class Database
 {
-    private $_dbh = null;
-    private static $_instance ;
-
     private $_dbh = null;
     private static $_instance ;
 
@@ -28,6 +23,12 @@ class Database
             self::$_instance = new Database();
         }
         return self::$_instance;
+    }
+
+    public function query($sql, $data = null){
+        $q = $this->_dbh->prepare($sql);
+        $q->execute($data);
+        return $q;
     }
 
 

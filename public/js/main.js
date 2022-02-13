@@ -3,9 +3,41 @@ import * as DOM from './modules/const.js';
 // import { makeChart } from './modules/chart.js';
 import * as Alert from './modules/alert.js';
 
+const socket = new WebSocket('wss://ws.hothothot.dog:9502');
+
+setTimeout(function(){
+  Utils.webSocketConnect(socket).then(function(socket) {
+    console.log("[open] Connection established");
+    socket.send("Connection");
+  }).catch(function(err) {
+    console.log(`[error] ${err.message}`);
+  });
+}, 2000)
+
+Utils.getWebSocketData(socket, (data) => {
+  console.log(data)
+
+  let formData = new FormData();
+  formData.append('data', JSON.stringify(data));
+
+  let fetchData = {
+    method: 'POST',
+    body: formData,
+    headers: new Headers()
+  }
 
 
+  fetch('/caching/save', fetchData)
+      .then(response => response.json())
+      .then((json) => {
+        updateUi(json)
+      })
+      .catch(err => console.log(err))
+})
 
+function updateUi(){
+
+}
 
 window.addEventListener("load", () => {
   if (localStorage.length == 0) {
@@ -26,9 +58,7 @@ window.addEventListener("load", () => {
 //
     //  loadHomeData();
     //});
-    const socket = new WebSocket('wss://ws.hothothot.dog:9502');
 
-    Utils.getWebSocketTemp(socket);
 
     // Listen for messages
     socket.addEventListener('message', function (event) {
