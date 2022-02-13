@@ -1,24 +1,67 @@
-//
-// var CACHE = 'my-sweet-mvc-cache-v1';
-//
-// // On install, cache some resource.
-// self.addEventListener('install', function(evt) {
-//     console.log('The service worker is being installed.');
-//     // Open a cache and use `addAll()` with an array of assets to add all of them
-//     // to the cache. Ask the service worker to keep installing until the
-//     // returning promise resolves.
-//     evt.waitUntil(caches.open(CACHE).then(function (cache) {
-//         cache.addAll([
-//             "/hothothot",
-//             "/public/assets/favicon/favicon-16x16.png",
-//             "/public/assets/favicon/favicon-32x32.png",
-//             "/public/assets/favicon/android-chrome-192x192.png",
-//             "/public/assets/favicon/android-chrome-512x512.png",
-//             "/sw.js",
-//         ]);
-//     }));
-// });
-//
+const hot_cache = 'hot_cache_v1';
+const staticAssets = [
+    "/hothothot",
+    "/public/js/main.js",
+    "/public/js/modules/alert.js",
+    "/public/js/modules/const.js",
+    "/public/js/modules/utils.js",
+    "/public/assets/favicon/favicon-16x16.png",
+    "/public/assets/favicon/favicon-32x32.png",
+    "/public/assets/favicon/android-chrome-192x192.png",
+    "/public/assets/favicon/android-chrome-512x512.png",
+    "/public/assets/logo.svg",
+    "/public/assets/img/arrow.svg",
+    "/public/assets/img/arrow-nobar.svg",
+    "/public/assets/img/edit.svg",
+    "/public/assets/img/Info.svg",
+    "/public/assets/img/Info.webp",
+    "/public/assets/img/NoAlert.svg",
+    "/public/assets/img/profilePicture.jpg",
+    "/public/assets/img/setting.svg",
+    "/public/assets/img/Warning.svg",
+    "/public/assets/img/Warning.webp",
+]
+
+// On install, cache static file.
+self.addEventListener('install', async e => {
+    const cache = await caches.open(hot_cache);
+    await cache.addAll(staticAssets);
+    return self.skipWaiting();
+})
+
+self.addEventListener('activate', e => {
+    self.clients.claim();
+})
+
+self.addEventListener('fetch', async e => {
+    const req = e.request;
+    const url = new URL(req.url)
+
+    if (url.origin === location.origin) {
+        e.respondWith(cacheFirst(req));
+    } else {
+        e.respondWith(networkAndCache(req));
+    }
+})
+
+async function cacheFirst(req) {
+    const cache = await caches.open(hot_cache);
+    const cached = await cache.match(req);
+    return cached || fetch(req);
+}
+
+async function networkAndCache(req){
+    const cache = await caches.open(hot_cache);
+    try {
+        const fresh = await fetch(req);
+        await cache.put(req, fresh.clone());
+        return fresh;
+    }catch (e){
+        const cached = await cache.match(req);
+        return cached;
+    }
+}
+
 // // On fetch, use cache but update the entry with the latest contents
 // // from the server.
 // self.addEventListener('fetch', function(evt) {
@@ -77,4 +120,4 @@
 //         });
 //     });
 // }
-//
+
