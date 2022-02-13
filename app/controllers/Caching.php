@@ -8,6 +8,6 @@ class Caching
     }
 
     public function get_data(){
-        CachingModel::get();
+        $data = CachingModel::get();
     }
 }

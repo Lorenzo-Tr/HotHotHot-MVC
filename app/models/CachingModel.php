@@ -29,6 +29,44 @@ class CachingModel
     {
         /*TODO
         { interior : { value : 16.2, min: 2, max: 20}
-        µ/
+        */
+        $db = new Database();
+
+
+        $sqlRecentvalueExt = "SELECT Max(timestamp),value FROM `hot_cache` WHERE name='exterieur'";
+        $sqlRecentvalueInt = "SELECT Max(timestamp),value FROM `hot_cache` WHERE name='interieur'";
+        $qRecentvalueExt = $db->query($sqlRecentvalueExt);
+        $qRecentvalueInt = $db->query($sqlRecentvalueInt);
+
+        $sqlMinExt = "SELECT Min(value) FROM `hot_cache` WHERE name='exterieur'";
+        $sqlMinInt = "SELECT Min(value) FROM `hot_cache` WHERE name='interieur'";
+        $qMinExt = $db->query($sqlMinExt);
+        $qMinInt = $db->query($sqlMinInt);
+
+        $sqlMaxExt = "SELECT Max(value) FROM `hot_cache` WHERE name='exterieur'";
+        $sqlMaxInt = "SELECT Max(value) FROM `hot_cache` WHERE name='interieur'";
+        $qMaxExt = $db->query($sqlMaxExt);
+        $qMaxInt = $db->query($sqlMaxInt);
+        
+
+        $arrayExt = [];
+        while($row =mysqli_fetch_assoc($qRecentvalueExt))
+        {
+            $arrayExt[] = $row;
+        }
+
+        $arrayInt = [];
+        while($row =mysqli_fetch_assoc($qRecentvalueInt))
+        {
+            $arrayInt[] = $row;
+        }
+
+        $array = [
+            'interieur' => ["value" => $arrayInt[1], "timestamp" => $arrayInt[0],"min" => mysqli_fetch_assoc($qMinInt),"max" => mysqli_fetch_assoc($qMaxInt)],
+            'exterieur' => ["value" => $arrayExt[1], "timestamp" => $arrayExt[0],"min" => mysqli_fetch_assoc($qMinExt),"max" => mysqli_fetch_assoc($qMaxExt)],
+        ];
+
+
+        return json_encode($array);
     }
 }
